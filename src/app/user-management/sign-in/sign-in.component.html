@@ -1,0 +1,111 @@
+<div class="body-page">
+  <div class="container">
+    <div class="floating-alert" *ngIf="!registrado" (click)="registrado = true">
+      <app-alerts [title]="titulo" [subtitle]="mensaje"></app-alerts>
+    </div>  
+
+    <div class="sign-form">
+
+      <h2>Registrate</h2>
+      <hr>
+      <form>
+        <div class="form-row">
+          <div class="form-group col-lg-4">
+            <label for="nombre">Nombre</label>
+            <input required type="text" class="form-control" id="nombre" placeholder="Name" [(ngModel)]="user.nombre"  name="nombre">
+          </div>
+          <div class="form-group col-lg-6">
+            <label for="apellidos">Apellidos</label>
+            <input required type="text" class="form-control" id="apellidos" placeholder="Last name"  [(ngModel)]="user.apellidos"  name="apellidos" >
+          </div>
+          <div class="form-group col-lg-2">
+            <label for="fechaNacimiento">Fecha Nacimiento</label>
+            <input required type="date" class="form-control" id="fechaNacimiento" placeholder="20/02/1990"   [(ngModel)]="user.fechaNacimiento"  name="fechaNacimiento" >
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-lg-4">
+            <label for="inputEmail">Correo</label>
+            <input required type="email" class="form-control" id="inputEmail" placeholder="E-mail"  [(ngModel)]="user.email"  name="mail" >
+          </div>
+          <div class="form-group col-lg-4">
+            <label for="inputUsername">Nombre de Usuario</label>
+            <input required type="text" class="form-control" id="inputUsername" placeholder="User name"   [(ngModel)]="user.usuario"  name="nombreUsuario" >
+          </div>
+          <div class="form-group col-lg-2">
+            <label for="inputPassword">Contraseña</label>
+            <input required type="password" class="form-control" id="inputPassword" placeholder="Password"   [(ngModel)]="user.password"  name="contraseña" >
+          </div>
+          <div class="form-group col-lg-2">
+              <label for="inputGen">Genero</label>
+              <select required class="form-control" id="inputGen"  [(ngModel)]="user.genero"  name="genero" >
+                <option selected>Choose ...</option>
+                <option>MASCULINO</option>
+                <option>FEMENINO</option>
+              </select>
+            </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-lg-3">
+            <label for="inputId">Documento</label>
+            <input required type="text" class="form-control" id="inputId" placeholder="1234398932"  [(ngModel)]="user.numeroDocumento"  name="documento" >
+          </div>
+          <div class="form-group col-lg-3">
+            <label for="inputAddress">Dirección</label>
+            <input required type="text" class="form-control" id="inputAddress" placeholder="Apartment, studio, or floor"   [(ngModel)]="user.direccion"  name="direccion" >
+          </div>
+          <div class="form-group col-lg-3">
+            <label for="inputPlaceExp">Lugar Expedición</label>
+            <input type="text" class="form-control" id="inputPlaceExp" placeholder="City or country"  [(ngModel)]="user.lugarExpedicion"  name="lugarExpedicion" >
+          </div>
+          <div class="form-group col-lg-3">
+            <label for="inputExpDate">Fecha expedición</label>
+            <input required type="date" class="form-control" id="inputExpDate" placeholder="20/02/1990"  [(ngModel)]="user.fechaExpedicion"  name="fechaExpedicion" >
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-lg-4">
+            <label for="inputOccupation">Ocupacion</label>
+            <input required type="text" class="form-control" id="inputOccupation" placeholder="Administrator"   [(ngModel)]="user.ocupacion"  name="ocupacion" >
+          </div>
+          <div class="form-group col-lg-4">
+            <label for="inputRol">Cargo</label>
+            <select required id="inputRol" class="form-control"  [(ngModel)]="user.cargo"  name="cargo" >
+              <option selected>Choose...</option>
+              <option>LECTOR</option>
+              <option>COORDINADOR</option>
+              <option>SUPERVISOR</option>
+              <option>TECNICO CARGUE Y DESCARGUE</option>
+            </select>
+          </div>
+          <div class="form-group col-lg-2">
+            <label for="inputPhoneNumber">Numero de telefono</label>
+            <input required type="text" class="form-control" id="inputPhoneNumber" placeholder="3445255"   [(ngModel)]="user.numeroTelefono"  name="telefono" >
+          </div>
+          <div class="form-group col-lg-2">
+            <label for="inputWorkCenter">Centro de trabajo</label>
+            <input required type="text" class="form-control" id="inputWorkCenter" placeholder="Palo Alto"   [(ngModel)]="user.centroTrabajo"  name="centroTrabajo" >
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputEnterprise">Empresa</label>
+          <input required type="text" class="form-control" id="inputEnterprise" placeholder="Ej: Tinfor inc"  [(ngModel)]="user.nombreEmpresa"  name="nombreEmpresa" >
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label" for="gridCheck">
+              Recordarme
+            </label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success btn-lg btn-block" (click)="auth()">Continuar</button>
+      </form>
+      
+    </div>
+
+  </div>
+
+
+
+</div>

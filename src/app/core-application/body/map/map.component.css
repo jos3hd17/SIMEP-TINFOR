@@ -1,0 +1,50 @@
+agm-map {
+    height: 92vh;
+    border-radius:15px;
+  }
+.float{
+  position: fixed;
+  z-index: 1;
+  width: 35%;
+  height: 300px;
+  float: right;
+  margin-left:48%;
+  margin-top: 45vh;
+  background-color: rgba(233, 233, 233, 0.8);
+  overflow-y: auto;
+  padding:10px;
+  border-radius: 5px;
+  opacity: .4;
+}
+.float:hover{
+  opacity: 1;
+}
+.help{
+  margin-left:63%;
+  margin-top: 2vh;
+  position: fixed;
+  z-index: 1;
+  width: 20%;
+  height: 50px;
+  opacity: .7;
+  border-radius: 4px;
+  background-color: rgba(204, 204, 204, 0.8);
+  padding: 2px;
+}
+.help:hover{
+  opacity:1;
+}
+.imagen{
+  background-image: url('./../../../../assets/images/tasks.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  height: 50px;
+  opacity: .8;
+}
+.imagen:hover{
+  opacity: 1;
+}
+.txt{
+    margin-top:10px;
+}

@@ -1,0 +1,21 @@
+export class User {
+    numeroDocumento:number;
+    lugarExpedicion:string;
+    fechaExpedicion:Date;
+    fechaNacimiento:Date;
+    genero:string;
+    nombreEmpresa:string;
+    nombre:string;
+    usuario:string;
+    apellidos:string;
+    email:string;
+    password:string;
+    numeroTelefono:number;
+    direccion:string;
+    ocupacion:string;
+    cargo:string;
+    centroTrabajo:string;
+    signUpDate:Date;
+    lastLogin:Date;
+    imgPerfil:string;
+}
