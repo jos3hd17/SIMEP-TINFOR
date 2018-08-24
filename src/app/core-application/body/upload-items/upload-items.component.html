@@ -4,18 +4,90 @@
 
 <div class="container espacios">
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-2">
       <label for="staticEmail2" class="sr-only"></label>
       <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Subir facturas en .xlsx">
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-3">
       <label for="inputPassword2" class="sr-only"></label>
       <input class="form-control" type="file" style="height: 43px;" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx">
     </div>
     <div class="col-lg-2">
       <button class="btn btn-primary mb-2" type="button" (click)="cargando=true;Upload()">Subir archivo</button>
-
     </div>
+    <div class="col-lg-3">
+      <label for="staticEmail2" class="sr-only"></label>
+      <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Subir facturas Manualmente">
+    </div>
+    <div class="col-lg-1">
+      <button class="btn btn-danger mb-2" type="button" (click)="showForm=true">Ingreso manual</button>
+    </div>
+  </div>
+</div>
+
+<div class="container espacios" *ngIf="showForm" style="padding: 15px;">
+  <h2>Cargar factura manualmente</h2>
+  <hr>
+  <div class="row">
+    <div class="col-md-2">
+      <label for="nic">NIC</label>
+      <input type="text" class="form-control" #nic placeholder="Ingrese el NIC">
+    </div>
+    <div class="col-md-5">
+      <label for="usern">Nombre de cliente</label>
+      <input type="text" class="form-control" #usern placeholder="Ej: Pepito Pérez">
+    </div>
+    <div class="col-md-5">
+      <label for="adress">Dirección</label>
+      <input type="text" class="form-control" #adress placeholder="Ej: Cll 34A 30-43">
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3">
+      <label for="unic">Unic</label>
+      <input type="text" class="form-control" #unic placeholder="Ingrese el UNIC">
+    </div>
+    <div class="col-md-3">
+      <label for="route">Ruta</label>
+      <input type="text" class="form-control" #route placeholder="Ingrese la ruta">
+    </div>
+    <div class="col-md-3">
+      <label for="itin">Itin</label>
+      <input type="text" class="form-control" #itin placeholder="Ingrese el ITIN">
+    </div>
+    <div class="col-md-3">
+      <label for="readDate">Fecha de lectura</label>
+      <input type="text" class="form-control" #readDate placeholder="Ej: 01/01/1990">
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-2">
+      <label for="nic">Fecha de impresión</label>
+      <input type="text" class="form-control" #nic placeholder="Ingrese el NIC">
+    </div>
+    <div class="col-md-3">
+      <label for="usern">Municipio</label>
+      <input type="text" class="form-control" #usern placeholder="Ej: Palo Alto C.A">
+    </div>
+    <div class="col-md-2">
+      <label for="clasif">Clasificación</label>
+      <input type="text" class="form-control" #clasif placeholder="Ingrese la clasificacion">
+    </div>
+    <div class="col-md-2">
+      <label for="reader">Lector</label>
+      <input type="text" class="form-control" #reader placeholder="Ej: Andrés O">
+    </div>
+    <div class="col-md-3">
+      <label for="printDate">Fecha de impresion</label>
+      <input type="date" class="form-control" #printDate placeholder="Ej: 12/10/1990">
+    </div>
+  </div>
+  <hr>
+  <div class="row container">
+    <div class="col"><button class="btn btn-danger mb-2" type="button" (click)="showForm=true" style="float:right">Ingresar</button></div>
+    <div class="col"><button class="btn btn-primary mb-2" type="button" (click)="showForm=false" style="float:left">Cancelar</button></div>
   </div>
 </div>
 

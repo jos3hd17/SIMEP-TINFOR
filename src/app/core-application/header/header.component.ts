@@ -10,8 +10,13 @@ export class HeaderComponent implements OnInit {
   public nombre:string="";
   public user:User=new User();
   constructor() {
-    this.user = JSON.parse(localStorage.getItem("usuario"));
-    console.log(this.user.nombre);
+    if(sessionStorage.getItem("usuario")){
+      this.user = JSON.parse(sessionStorage.getItem("usuario"));
+    } else {
+      this.user = JSON.parse(localStorage.getItem("usuario"));
+    }
+   
+    console.log(this.user);
     this.nombre = this.user.nombre;
    }
 

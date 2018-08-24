@@ -3,25 +3,22 @@ import { HttpClient } from '@angular/common/http';
 import * as baseUrl from '../../../assets/const/constants';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
-import * as crypto from 'crypto-js'; 
+import * as crypto from 'crypto-js';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LogInService {
   const = baseUrl.baseUrl + 'usuario/logIn'; //Para guardar un usuario
-  constructor(private http:HttpClient) { 
+  constructor(private http: HttpClient) {
 
   }
-  loginUser(data:User,password:string): Observable<any>{
-    
-
+  loginUser(data: User, password: string): Observable<any> {
     let json = {
-        usuario: data.usuario,
-        password:password
+      usuario: data.usuario,
+      password: password
     }
-
-    return this.http.post(this.const,json);
+    return this.http.post(this.const, json);
   }
 
 }

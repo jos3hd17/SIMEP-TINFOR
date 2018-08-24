@@ -1,51 +1,36 @@
 <div class="container espacios">
-  <h2>Maps</h2>
-  <hr>
+  <div class="row" >
+    <div class="col-1" style="min-width: 100px;">
+        <h2>Maps</h2>
+    </div>
+    <div class="col-9">
+        <p style="margin-top: 13px;">Busque en el mapa una guia</p>
+    </div>
+  </div>
+ 
+  <hr style="margin-top: -7px;">
   <div class="row ancho">
     <div class="col-lg-8">
-      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="16">
-        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13" [mapDraggable]="false">
+        <agm-marker *ngFor="let data of array" [latitude]="data.lat" [longitude]="data.long" [iconUrl]="messager"></agm-marker>
+        <agm-marker *ngFor="let datadetail of array" [latitude]="datadetail.receptor.lat" [longitude]="datadetail.receptor.long" [iconUrl]="locate"></agm-marker>
       </agm-map>
     </div>
     <div class="col-lg-4 scroll">
       <div class="input-group" style="width: 100%;margin:2px 0px 2px 0px">
-        <input type="text" class="form-control" placeholder="Nombre..." aria-label="Recipient's username" aria-describedby="button-addon2">
+        <input type="text" class="form-control" placeholder="Nombre..." aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="searchbar" name="searchbar">
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" id="button-addon2">Buscar</button>
+          <button class="btn btn-outline-secondary" type="button" id="button-addon2" >Buscar</button>
         </div>
       </div>
       <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let list of array" (mouseover)="center(list.lat,list.long)">
           <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">Juan Carlos Cabello</h5>
-            <small>Ubicación</small>
+            <h5 class="mb-1">{{list.mensajero.nombre}}  {{list.mensajero.apellidos}}</h5>
+            <small>{{list.ubicacion}}</small>
           </div>
-          <p class="mb-1">El mensajero se encuentra en camino hacia la recepción del paquete</p>
-          <small>3 paquetes faltantes</small>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small class="text-muted">3 days ago</small>
-          </div>
-          <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-          <small class="text-muted">Donec id elit non mi porta.</small>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small class="text-muted">3 days ago</small>
-          </div>
-          <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-          <small class="text-muted">Donec id elit non mi porta.</small>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small class="text-muted">3 days ago</small>
-          </div>
-          <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-          <small class="text-muted">Donec id elit non mi porta.</small>
+          <p class="mb-1">{{list.observaciones}}</p>
+          <small>{{list.mensajero.observaciones}}</small>
         </a>
       </div>
 

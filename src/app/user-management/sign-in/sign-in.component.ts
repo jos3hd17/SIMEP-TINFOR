@@ -32,7 +32,7 @@ export class SignInComponent implements OnInit {
 
     let password = crypto.SHA512(this.user.password).toString();
     this.user.password = password;
-    console.log(this.user.password);
+   
     if(this.user.usuario =="" ||
      this.user.password == "" ||
      this.user.nombre =="" ||
@@ -43,8 +43,8 @@ export class SignInComponent implements OnInit {
      this.user.email ==""){
     this.signIn.saveUser(this.user).subscribe( res => {
       if(res.message !== 'Usuario ya registrado'){
-        
         localStorage.setItem("usuario", JSON.stringify(this.user));
+        //localStorage.setItem("accessToken",res.token);
         this.router.navigate(['core']);
       } else{
         this.titulo = this.tituloAlerta;

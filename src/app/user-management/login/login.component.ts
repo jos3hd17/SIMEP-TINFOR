@@ -31,6 +31,10 @@ export class LoginComponent implements OnInit {
     if ((this.user.usuario !== '' && this.user.usuario !== undefined) && this.user.usuario !== '') {
 
       this.login.loginUser(this.user, password).subscribe(res => {
+        this.user = res.usuario;
+        console.log("this.user");
+        console.log(this.user);
+        
         if (this.checked) {
           this.user.password = password;
           localStorage.setItem("usuario", JSON.stringify(this.user));
