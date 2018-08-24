@@ -9,6 +9,7 @@ import { PreviewStadisticsComponent } from '../core-application/body/preview-sta
 import { UploadItemsComponent } from '../core-application/body/upload-items/upload-items.component';
 import { DelivererComponent } from '../core-application/body/deliverer/deliverer.component';
 import { MapComponent } from '../core-application/body/map/map.component';
+import { ReadFactsComponent } from '../core-application/body/read-facts/read-facts.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path:'deliver',
         component:DelivererComponent
+      },
+      {
+        path:'read',
+        component:ReadFactsComponent
       },
       {
         path:'map',

@@ -18,10 +18,7 @@
     </div>
     <div class="col-lg-4 scroll">
       <div class="input-group" style="width: 100%;margin:2px 0px 2px 0px">
-        <input type="text" class="form-control" placeholder="Nombre..." aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="searchbar" name="searchbar">
-        <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" id="button-addon2" >Buscar</button>
-        </div>
+        <input type="text" class="form-control" placeholder="Nombre..." aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="searchbar" name="searchbar" (ngModelChange)="search()">
       </div>
       <div class="list-group">
         <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let list of array" (mouseover)="center(list.lat,list.long)">

@@ -17,3 +17,25 @@
      height: 80px;
      min-width: 300px;
  }
+
+ .fav-button{
+   float: right;
+   position: fixed;
+   z-index:1;
+   width: 50px;
+   height: 50px;
+   margin-top:80vh;
+   background-image: url('../../../../assets/images/diskette.png');
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: auto;
+   background-color: rgba(75, 174, 255, 0.7);
+   border:solid rgb(0, 89, 255) 0.5px;
+   
+   margin-left:78%;
+   border-radius:50px;
+ }
+ .fav-button:hover{
+  background-color: rgb(33, 152, 250);
+  cursor: pointer;
+ }

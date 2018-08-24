@@ -9,19 +9,19 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
-  closeSession(){
+  closeSession() {
     sessionStorage.clear();
     localStorage.clear();
     this.router.navigate(['login']);
   }
 
-  goTo(id){
-    switch(id){
+  goTo(id) {
+    switch (id) {
       case 1:
         this.router.navigate(['core/preview']);
         break;
@@ -34,9 +34,12 @@ export class SidebarComponent implements OnInit {
       case 4:
         this.router.navigate(['core/deliver']);
         break;
+      case 5:
+        this.router.navigate(['core/read']);
+        break;
       default:
         this.router.navigate(['core/preview']);
         break;
     }
-  } 
+  }
 }

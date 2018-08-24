@@ -14,6 +14,7 @@ export class PreviewStadisticsComponent implements OnInit {
     lat: number = 6.27053;
     lng: number = -75.57211999999335;
     array = [];
+    arraybase=[];
     searchbar ="";
     messager = "../../../../assets/images/delivery-cart.png";
     locate = "../../../../assets/images/placeholder.png";
@@ -23,6 +24,7 @@ export class PreviewStadisticsComponent implements OnInit {
     ngOnInit() {
         this.service.getCollection().subscribe(res => {
             this.array = res;
+            this.arraybase=res;
         });
 
         this.chart = new Chart('canvas', {
@@ -64,8 +66,10 @@ export class PreviewStadisticsComponent implements OnInit {
         this.lng = long;
     }
 
- /*    search(){
-        this.array = this.array.filter(t => (t.mensajero.nombre).String.contains(this.searchbar));
-    } */
+   search(){
+
+       let jsonArray =this.arraybase.filter(t => t.mensajero.nombre.toLowerCase().search(this.searchbar)==0 || t.mensajero.apellidos.toLowerCase().search(this.searchbar)==0);
+       this.array = jsonArray;
+    } 
 
 }

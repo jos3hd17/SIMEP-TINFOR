@@ -24,6 +24,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import {AgGridModule} from 'ag-grid-angular/main';
 import { GenericNotifyComponent } from './generic-notify/generic-notify.component';
+import { ReadFactsComponent } from './core-application/body/read-facts/read-facts.component';
 
 
 var firebaseconfig = {
@@ -51,7 +52,8 @@ var firebaseconfig = {
     DelivererComponent,
     MapComponent,
     AlertsComponent,
-    GenericNotifyComponent
+    GenericNotifyComponent,
+    ReadFactsComponent
   ],
   imports: [
     BrowserModule, RoutesRoutingModule, BrowserAnimationsModule,AgGridModule.withComponents([]), AngularFirestoreModule.enablePersistence(), AngularFireModule.initializeApp(firebaseconfig), FormsModule, HttpClientModule, AgmCoreModule.forRoot({

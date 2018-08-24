@@ -1,19 +1,53 @@
+<div class="fav-button" *ngIf="showInformation" (click)="save()"></div>
+
 <div class="container espacios">
-  
+
   <div class="row">
     <div class="col-lg-6">
       <label for="staticEmail2" class="sr-only"></label>
-      <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Elegír usuario">
+      <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Digita la identificación">
     </div>
     <div class="col-lg-4">
       <label for="inputPassword2" class="sr-only"></label>
-      <select required class="form-control" id="inputGen" name="genero" >
-        <option value="" disabled selected>Choose ...</option>
-        <option>MASCULINO</option>
-        <option>FEMENINO</option>
-      </select>
+      <input type="text" class="form-control" placeholder="Ej: 1234567" [(ngModel)]="idUser" name="id">
     </div>
-    <div class="col-lg-2"><button class="btn btn-primary mb-2" type="button">Siguiente</button></div>
-    
+    <div class="col-lg-2">
+      <button class="btn btn-primary mb-2" type="button" (click)="search()">Siguiente</button>
+    </div>
+
   </div>
+</div>
+
+<div class="row" style="width: 99.5%;margin-left:auto;margin-right:auto" *ngIf="showInformation">
+  <div class="col-lg">
+    <div class="espacios" style="width: 100%">
+      <div class="row container">
+        <div class="col-lg-6">
+          <h4>Facturas Leidas</h4>
+        </div>
+        <div class="col-lg-6"><p style="margin-top: 6px;">Seleccione o deseleccione</p></div>
+      </div>
+      <div class="row">
+        <ag-grid-angular class="ag-theme-balham" style="width: 95%;height: 435px;margin-left:auto;margin-right:auto;margin-top:0px"
+          [columnDefs]="columnDefs" (selectionChanged)="onSelectionChanged($event)" [rowSelection]="rowSelection"  [rowMultiSelectWithClick]="true" [rowData]="rowData" (gridReady)="onGridReady($event)" [enableSorting]="true" [enableFilter]="true"></ag-grid-angular>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg">
+    <div class="espacios" style="width: 100%">
+      <div class="row container">
+        <div class="col-lg-6">
+          <h4>Facturas Asignadas</h4>
+        </div>
+        <div class="col-lg-6"><p style="margin-top: 6px;">Visualizar</p></div>
+      </div>
+      <div class="row">
+        <ag-grid-angular class="ag-theme-balham" style="width: 95%;height: 435px;margin-left:auto;margin-right:auto;margin-top:0px"
+          [columnDefs]="columnDefs" (gridReady)="onGridTwoReady($event)" [enableSorting]="true" [enableFilter]="true"></ag-grid-angular>
+      </div>
+
+    </div>
+  </div>
+
+
 </div>
