@@ -3,6 +3,15 @@
 </div>
 
 <div class="container espacios">
+    <div class="row" >
+        <div class="col-1" style="min-width: 100px;">
+            <h2>Cargar</h2>
+        </div>
+        <div class="col-9">
+            <p style="margin-top: 13px;margin-left: 10px;">Cargue sus archivos de forma manual o automáticamente</p>
+        </div>
+      </div>
+      <hr style="margin-top: -7px;">
   <div class="row">
     <div class="col-lg-2">
       <label for="staticEmail2" class="sr-only"></label>
@@ -13,7 +22,7 @@
       <input class="form-control" type="file" style="height: 43px;" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx">
     </div>
     <div class="col-lg-2">
-      <button class="btn btn-primary mb-2" type="button" (click)="cargando=true;Upload()">Subir archivo</button>
+      <button class="btn btn-primary mb-2" type="button" (click)="Upload()">Subir archivo</button>
     </div>
     <div class="col-lg-3">
       <label for="staticEmail2" class="sr-only"></label>
@@ -31,62 +40,59 @@
   <div class="row">
     <div class="col-md-2">
       <label for="nic">NIC</label>
-      <input type="text" class="form-control" #nic placeholder="Ingrese el NIC">
+      <input type="text" class="form-control" #nic placeholder="Ingrese el NIC" [(ngModel)]="factura.NIC" name="nic">
     </div>
     <div class="col-md-5">
       <label for="usern">Nombre de cliente</label>
-      <input type="text" class="form-control" #usern placeholder="Ej: Pepito Pérez">
+      <input type="text" class="form-control" #usern placeholder="Ej: Pepito Pérez"  [(ngModel)]="factura.NombreCliente" name="NombreCliente">
     </div>
     <div class="col-md-5">
       <label for="adress">Dirección</label>
-      <input type="text" class="form-control" #adress placeholder="Ej: Cll 34A 30-43">
+      <input type="text" class="form-control" #adress placeholder="Ej: Cll 34A 30-43" [(ngModel)]="factura.Direccion" name="Direccion">
     </div>
   </div>
   <br>
   <div class="row">
     <div class="col-md-3">
       <label for="unic">Unic</label>
-      <input type="text" class="form-control" #unic placeholder="Ingrese el UNIC">
+      <input type="text" class="form-control" #unic placeholder="Ingrese el UNIC" [(ngModel)]="factura.Unic" name="Unic">
     </div>
     <div class="col-md-3">
       <label for="route">Ruta</label>
-      <input type="text" class="form-control" #route placeholder="Ingrese la ruta">
+      <input type="text" class="form-control" #route placeholder="Ingrese la ruta" [(ngModel)]="factura.Ruta" name="Ruta">
     </div>
     <div class="col-md-3">
       <label for="itin">Itin</label>
-      <input type="text" class="form-control" #itin placeholder="Ingrese el ITIN">
+      <input type="text" class="form-control" #itin placeholder="Ingrese el ITIN" [(ngModel)]="factura.Itin" name="Itin">
     </div>
     <div class="col-md-3">
       <label for="readDate">Fecha de lectura</label>
-      <input type="text" class="form-control" #readDate placeholder="Ej: 01/01/1990">
+      <input type="date" class="form-control" #readDate placeholder="Ej: 01/01/1990" [(ngModel)]="factura.FechaLectura" name="FechaLectura">
     </div>
   </div>
   <br>
   <div class="row">
-    <div class="col-md-2">
-      <label for="nic">Fecha de impresión</label>
-      <input type="text" class="form-control" #nic placeholder="Ingrese el NIC">
+    <div class="col-md-3">
+      <label for="dateimp">Fecha de impresión</label>
+      <input type="date" class="form-control" #dateimp placeholder="Fecha de impresion" [(ngModel)]="factura.FechaImpresion" name="FechaImpresion" >
     </div>
     <div class="col-md-3">
-      <label for="usern">Municipio</label>
-      <input type="text" class="form-control" #usern placeholder="Ej: Palo Alto C.A">
+      <label for="village">Municipio</label>
+      <input type="text" class="form-control" #village placeholder="Ej: Palo Alto C.A"  [(ngModel)]="factura.Municipio" name="Municipio">
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
       <label for="clasif">Clasificación</label>
-      <input type="text" class="form-control" #clasif placeholder="Ingrese la clasificacion">
-    </div>
-    <div class="col-md-2">
-      <label for="reader">Lector</label>
-      <input type="text" class="form-control" #reader placeholder="Ej: Andrés O">
+      <input type="text" class="form-control" #clasif placeholder="Ingrese la clasificacion"  [(ngModel)]="factura.Clasificacion" name="Clasificacion">
     </div>
     <div class="col-md-3">
-      <label for="printDate">Fecha de impresion</label>
-      <input type="date" class="form-control" #printDate placeholder="Ej: 12/10/1990">
+      <label for="reader">Lector</label>
+      <input type="text" class="form-control" #reader placeholder="Ej: Andrés O"  [(ngModel)]="factura.Lector" name="Lector">
     </div>
+    
   </div>
   <hr>
   <div class="row container">
-    <div class="col"><button class="btn btn-danger mb-2" type="button" (click)="showForm=true" style="float:right">Ingresar</button></div>
+    <div class="col"><button class="btn btn-danger mb-2" type="button" (click)="save()" style="float:right">Ingresar</button></div>
     <div class="col"><button class="btn btn-primary mb-2" type="button" (click)="showForm=false" style="float:left">Cancelar</button></div>
   </div>
 </div>

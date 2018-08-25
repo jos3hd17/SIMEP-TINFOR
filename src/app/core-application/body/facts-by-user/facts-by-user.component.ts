@@ -1,26 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-read-facts',
-  templateUrl: './read-facts.component.html',
-  styleUrls: ['./read-facts.component.css']
+  selector: 'app-facts-by-user',
+  templateUrl: './facts-by-user.component.html',
+  styleUrls: ['./facts-by-user.component.css']
 })
-export class ReadFactsComponent implements OnInit {
-
+export class FactsByUserComponent implements OnInit {
   private gridApi;
   private gridColumnApi;
   private columnDefs:any=[];
-  public jsonTableLeidos: any = [{
-    FechaImpresion: "21/29/0100",
-    NIC: "2343"
-  },
-  {
-    FechaImpresion: "21/29/0100",
-    NIC: "2345"
-  }
-  ];
 
-  constructor() { 
+  constructor() {
     this.columnDefs = [
       {
         headerName: "Fecha impresion",
@@ -89,7 +79,7 @@ export class ReadFactsComponent implements OnInit {
         sortingOrder: ["asc", "desc"]
       }
     ]
-  }
+   }
 
   ngOnInit() {
   }
@@ -97,7 +87,7 @@ export class ReadFactsComponent implements OnInit {
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    params.api.setRowData(this.jsonTableLeidos);
+    params.api.setRowData();
   }
 
 }

@@ -37,6 +37,9 @@ export class SidebarComponent implements OnInit {
       case 5:
         this.router.navigate(['core/read']);
         break;
+        case 6:
+        this.router.navigate(['core/facts-by-user']);
+        break;
       default:
         this.router.navigate(['core/preview']);
         break;

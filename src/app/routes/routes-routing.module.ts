@@ -10,6 +10,7 @@ import { UploadItemsComponent } from '../core-application/body/upload-items/uplo
 import { DelivererComponent } from '../core-application/body/deliverer/deliverer.component';
 import { MapComponent } from '../core-application/body/map/map.component';
 import { ReadFactsComponent } from '../core-application/body/read-facts/read-facts.component';
+import { FactsByUserComponent } from '../core-application/body/facts-by-user/facts-by-user.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path:'read',
         component:ReadFactsComponent
+      },
+      {
+        path:'facts-by-user',
+        component:FactsByUserComponent
       },
       {
         path:'map',
