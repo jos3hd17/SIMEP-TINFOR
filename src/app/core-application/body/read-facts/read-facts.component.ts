@@ -1,26 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { ReadFactsService } from './read-facts.service';
 
 @Component({
   selector: 'app-read-facts',
   templateUrl: './read-facts.component.html',
-  styleUrls: ['./read-facts.component.css']
+  styleUrls: ['./read-facts.component.css'],
+  providers:[ReadFactsService]
 })
 export class ReadFactsComponent implements OnInit {
 
   private gridApi;
   private gridColumnApi;
   private columnDefs:any=[];
-  public jsonTableLeidos: any = [{
-    FechaImpresion: "21/29/0100",
-    NIC: "2343"
-  },
-  {
-    FechaImpresion: "21/29/0100",
-    NIC: "2345"
-  }
-  ];
+  public jsonTableLeidos: any =[];
+  public NIC:string="";
 
-  constructor() { 
+  constructor(private readFactsService:ReadFactsService) { 
     this.columnDefs = [
       {
         headerName: "Fecha impresion",
@@ -92,12 +87,23 @@ export class ReadFactsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.readFactsService.getLeidas().subscribe(t=>{
+      this.jsonTableLeidos = t.facturas;
+      this.gridApi.setRowData(this.jsonTableLeidos);
+    });
   }
 
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     params.api.setRowData(this.jsonTableLeidos);
+  }
+
+  read(){
+    this.readFactsService.setLeido(this.NIC).subscribe(t =>{
+      this.jsonTableLeidos = t.facturas;
+      this.gridApi.setRowData(this.jsonTableLeidos);
+    })
   }
 
 }

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchResponse } from '../models/search-res.model';
+import { DelivererService } from './deliverer.service';
 
 @Component({
   selector: 'app-deliverer',
   templateUrl: './deliverer.component.html',
-  styleUrls: ['./deliverer.component.css']
+  styleUrls: ['./deliverer.component.css'],
+  providers:[DelivererService]
 })
 export class DelivererComponent implements OnInit {
   private gridApiLeidos;
@@ -17,21 +19,11 @@ export class DelivererComponent implements OnInit {
   private rowSelection;
   private showInformation:boolean =false;
   private responseSearch:SearchResponse = new SearchResponse();
-  public jsonTableLeidos: any = [{
-    FechaImpresion: "21/29/0100",
-    NIC: "2343"
-  },
-  {
-    FechaImpresion: "21/29/0100",
-    NIC: "2345"
-  }
-  ];
-  public jsonTableAsignados: any;
-  constructor() {
+  public jsonTableLeidos: any = [];
+  public jsonTableAsignados: any = [];
+  constructor(private delivererService:DelivererService) {
     this.jsonTableAsignados = [];
-    this.responseSearch.mensajero.nombre = "Jose";
-    this.responseSearch.mensajero.documento = "1035437631";
-    this.responseSearch.leidos = this.jsonTableLeidos;
+    //this.responseSearch.leidos = this.jsonTableLeidos;
     
     this.rowSelection = "multiple";
     this.columnDefs = [
@@ -148,11 +140,18 @@ export class DelivererComponent implements OnInit {
     this.gridApiAsignados.setRowData(this.jsonTableAsignados[0]);
    }
   search() {
-    if(this.idUser == this.responseSearch.mensajero.documento){
-      this.showInformation =true;
-    } else {
-      this.showInformation = false;
-    }
+    this.delivererService.searchUserById(this.idUser).subscribe(t=>{
+      console.log(t);
+      if(t.usuario){
+        this.showInformation =true;
+        this.responseSearch.leidos = t.facturas;
+       // this.gridApiLeidos.setRowData(this.responseSearch.leidos);
+       
+      } else {
+        this.showInformation = false;
+      }
+    });
+    
   }
 
   save(){

@@ -100,6 +100,14 @@ export class UploadItemsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.uploadService.getFacturas().subscribe(t => {
+      if(t.facturas){
+        this.jsonTable = t.facturas;
+        this.showTable = true;
+        this.gridApi.setRowData(this.jsonTable);
+      }
+     
+    });
   }
   onGridReady(params) {
     this.gridApi = params.api;
@@ -178,14 +186,24 @@ export class UploadItemsComponent implements OnInit {
       Clasificacion: this.factura.Clasificacion,
       Lector: this.factura.Lector
     }
+   
     tempManuales.push(json);
     tempJson.push(json);
     this.jsonTable = tempJson;
+ 
     this.showTable = true;
     this.showForm = false;
-    if (this.gridApi !== undefined) {
-      this.gridApi.setRowData(this.jsonTable);
-    }
+    
+    this.uploadService.setFactura(this.factura).subscribe(t => {
+      this.jsonTable = t.facturas;
+      console.log(this.jsonTable);
+      if (this.gridApi !== undefined) {
+    
+        this.gridApi.setRowData(this.jsonTable);
+      }
+    });
+    
+    
 
   }
 

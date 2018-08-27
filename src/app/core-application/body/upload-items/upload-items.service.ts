@@ -10,6 +10,7 @@ import * as baseUrl from '../../../../assets/const/constants';
 })
 export class UploadItemsService {
   saveFacturasUrl = baseUrl.baseUrl + 'facturas'; //Para guardar todas las facturas
+  getFacturaUrl = baseUrl.baseUrl + 'factura'; //Para guardar todas las facturas
   constructor(private http:HttpClient) { }
 
   setFacturas(facturasList):Observable<any>{
@@ -19,5 +20,14 @@ export class UploadItemsService {
     } 
     console.log(json);
     return this.http.post(this.saveFacturasUrl,json);
+  }
+  setFactura(factura):Observable<any>{
+    let json ={
+      facturas:[factura]
+  } 
+    return this.http.post(this.saveFacturasUrl,json);
+  }
+  getFacturas():Observable<any>{
+    return this.http.get(this.getFacturaUrl);
   }
 }
