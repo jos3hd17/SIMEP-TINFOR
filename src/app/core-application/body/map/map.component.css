@@ -48,3 +48,8 @@ agm-map {
 .txt{
     margin-top:10px;
 }
+
+.scroll{
+  overflow-y: auto;
+  height: 500px;
+}

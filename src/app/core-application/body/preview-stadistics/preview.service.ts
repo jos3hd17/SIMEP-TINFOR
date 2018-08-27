@@ -17,7 +17,6 @@ export class PreviewService {
   getCollection():Observable<Pedido[]>{
     this.pedidosCol = this.afs.collection('simep/pedidos/1');
     this.pedidos = this.pedidosCol.valueChanges();
-    console.log(this.pedidos);
     return this.pedidos;
   }
 }

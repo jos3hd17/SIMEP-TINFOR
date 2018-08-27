@@ -104,7 +104,6 @@ export class UploadItemsComponent implements OnInit {
       if(t.facturas){
         this.jsonTable = t.facturas;
         this.showTable = true;
-        this.gridApi.setRowData(this.jsonTable);
       }
      
     });
@@ -164,7 +163,6 @@ export class UploadItemsComponent implements OnInit {
 
 
       this.cargando = false;
-      console.log(this.jsonTable);
     }
     fileReader.readAsArrayBuffer(this.file);
   }

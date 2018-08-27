@@ -61,7 +61,6 @@ export class PreviewStadisticsComponent implements OnInit {
     }
 
     center(lat,long){
-        console.log(lat + "" + long);
         this.lat = lat;
         this.lng = long;
     }
