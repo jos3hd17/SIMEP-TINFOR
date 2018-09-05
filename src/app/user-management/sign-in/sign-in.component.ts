@@ -22,12 +22,18 @@ export class SignInComponent implements OnInit {
   public mensajeError:string="No ha sido posible realizar el registro, intente nuevamente";
   public titulo:string;
   public mensaje:string;
+  public color:string = "alert";
   constructor(private router:Router, private signIn:SignInService) {
     
   }
 
   ngOnInit() {
   }
+
+  back(){
+    this.router.navigate(['core/preview']);
+  }
+
   auth(){
 
     let password = crypto.SHA512(this.user.password).toString();
@@ -43,14 +49,17 @@ export class SignInComponent implements OnInit {
      this.user.email ==""){
     this.signIn.saveUser(this.user).subscribe( res => {
       if(res.message !== 'Usuario ya registrado'){
-        localStorage.setItem("usuario", JSON.stringify(this.user));
-        //localStorage.setItem("accessToken",res.token);
-        this.router.navigate(['core']);
+        this.titulo = "Creado correctamente";
+        this.mensaje = "Verifique su informacion realizando el login respectivo";
+        this.color = "success";
+        this.registrado = false;
+        this.user.password = "";
+        this.user = new User();
       } else{
         this.titulo = this.tituloAlerta;
         this.mensaje = this.mensajeAlerta;
         this.registrado = false;
-        this.user.password = "";
+        this.user.password = ""; 
       }
     },
     err => {

@@ -13,7 +13,10 @@ export class DelivererComponent implements OnInit {
   private gridColumnApiLeidos;
   private gridApiAsignados;
   private gridColumnApiAsignados;
+  private gridApiUsuarios;
+  private gridColumnApiUsuarios;
   private columnDefs;
+  private columnUsers;
   public idUser: string = "";
   private rowData: any[];
   private rowSelection;
@@ -21,11 +24,66 @@ export class DelivererComponent implements OnInit {
   private responseSearch:SearchResponse = new SearchResponse();
   public jsonTableLeidos: any = [];
   public jsonTableAsignados: any = [];
+  public jsonTableUsuarios:any = [];
+  public localeText;
   constructor(private delivererService:DelivererService) {
     this.jsonTableAsignados = [];
-    //this.responseSearch.leidos = this.jsonTableLeidos;
+
+    this.localeText = {
+      page: "Pagina",
+      more: "Más",
+      to: "A",
+      of: "De",
+      next: "Siguiente",
+      last: "Último",
+      first: "Primero",
+      previous: "Anterior",
+      loadingOoo: "Cargando...",
+      selectAll: "Seleccionar todo",
+      searchOoo: "Buscar...",
+      blanks: "En blanco",
+      filterOoo: "Filtrar...",
+      applyFilter: "Aplicar filtro...",
+      equals: "Igual",
+      notEqual: "No es igual",
+      lessThanOrEqual: "Menor o igual",
+      greaterThanOrEqual: "Mayor o igual",
+      inRange: "Rango",
+      lessThan: "Menor que",
+      greaterThan: "Mayor que",
+      contains: "Contiene",
+      startsWith: "Comienza por",
+      endsWith: "Finaliza por",
+      group: "Grupo",
+      columns: "Columnas",
+      groupBy: "Agrupar por",
+      ungroupBy: "Desagrupar",
+      resetColumns: "Reestablecer columnas",
+      notContains:"No contiene",
+      and:"Y",
+      or:"O"
+    };
+  
     
     this.rowSelection = "multiple";
+    //this.rowSelection = "single";
+    this.columnUsers = [
+      {
+        headerName: "Nombre",
+        field: "nombre",
+        width: 250,
+        sortingOrder: ["asc", "desc"],
+        autoHeight: true
+      },
+      {
+        headerName: "Documento",
+        field: "numeroDocumento",
+        width: 230,
+        sortingOrder: ["asc", "desc"],
+        autoHeight: true
+
+      }
+    ]
     this.columnDefs = [
       {
         headerName: "Fecha impresion",
@@ -111,6 +169,13 @@ export class DelivererComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.delivererService.getUsers().subscribe(t=>{
+      if (!t.message){
+        this.jsonTableUsuarios = t;
+        console.log(t)
+        this.gridApiUsuarios.setRowData(this.jsonTableUsuarios);
+      }
+    });
   }
   agregar() {
 
@@ -127,6 +192,11 @@ export class DelivererComponent implements OnInit {
     this.gridColumnApiAsignados = params.columnApi;
     params.api.setRowData(this.jsonTableAsignados);
   }
+  onGridThreeReady(params) {
+    this.gridApiUsuarios = params.api;
+    this.gridColumnApiUsuarios = params.columnApi;
+    params.api.setRowData(this.jsonTableUsuarios);
+  }
 
   onSelectionChanged() {
     var selectedRows = this.gridApiLeidos.getSelectedRows();
@@ -139,14 +209,20 @@ export class DelivererComponent implements OnInit {
     console.log(this.jsonTableAsignados);
     this.gridApiAsignados.setRowData(this.jsonTableAsignados[0]);
    }
-  search() {
-    this.delivererService.searchUserById(this.idUser).subscribe(t=>{
-      console.log(t);
+   onSelectChanged(){
+     this.showInformation = true;
+     var selectedRows = this.gridApiUsuarios.getSelectedRows();
+     console.log(selectedRows[0].numeroDocumento)
+     this.search(selectedRows[0].numeroDocumento);
+   }
+  search(param) {
+    console.log(param)
+    this.delivererService.searchUserById(param).subscribe(t=>{
+      sessionStorage.setItem("usr-temp",param);
       if(t.usuario){
-        this.showInformation =true;
+       // this.showInformation =true;
         this.responseSearch.leidos = t.facturas;
-       // this.gridApiLeidos.setRowData(this.responseSearch.leidos);
-       
+        this.gridApiLeidos.setRowData(this.responseSearch.leidos);
       } else {
         this.showInformation = false;
       }
@@ -155,9 +231,14 @@ export class DelivererComponent implements OnInit {
   }
 
   save(){
-    console.log(this.jsonTableAsignados);
-    localStorage.setItem("asignados", JSON.stringify(this.jsonTableAsignados));
-    localStorage.setItem("leidos", JSON.stringify(this.responseSearch));
+    
+    this.delivererService.setUserAndDocuments(sessionStorage.getItem('usr-temp'),this.jsonTableAsignados).subscribe(t=>{
+
+      console.log(t);
+      this.showInformation = false;
+      this.idUser ="";
+
+    });
     
   }
 

@@ -14,8 +14,45 @@ export class ReadFactsComponent implements OnInit {
   private columnDefs:any=[];
   public jsonTableLeidos: any =[];
   public NIC:string="";
+  public localeText;
 
   constructor(private readFactsService:ReadFactsService) { 
+    this.localeText = {
+      page: "Pagina",
+      more: "Más",
+      to: "A",
+      of: "De",
+      next: "Siguiente",
+      last: "Último",
+      first: "Primero",
+      previous: "Anterior",
+      loadingOoo: "Cargando...",
+      selectAll: "Seleccionar todo",
+      searchOoo: "Buscar...",
+      blanks: "En blanco",
+      filterOoo: "Filtrar...",
+      applyFilter: "Aplicar filtro...",
+      equals: "Igual",
+      notEqual: "No es igual",
+      lessThanOrEqual: "Menor o igual",
+      greaterThanOrEqual: "Mayor o igual",
+      inRange: "Rango",
+      lessThan: "Menor que",
+      greaterThan: "Mayor que",
+      contains: "Contiene",
+      startsWith: "Comienza por",
+      endsWith: "Finaliza por",
+      group: "Grupo",
+      columns: "Columnas",
+      groupBy: "Agrupar por",
+      ungroupBy: "Desagrupar",
+      resetColumns: "Reestablecer columnas",
+      notContains:"No contiene",
+      and:"Y",
+      or:"O"
+    };
+  
+
     this.columnDefs = [
       {
         headerName: "Fecha impresion",
@@ -102,6 +139,7 @@ export class ReadFactsComponent implements OnInit {
   read(){
     this.readFactsService.setLeido(this.NIC).subscribe(t =>{
       this.jsonTableLeidos = t.facturas;
+      this.NIC = "";
       this.gridApi.setRowData(this.jsonTableLeidos);
     })
   }

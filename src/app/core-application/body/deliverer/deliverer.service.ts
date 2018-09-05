@@ -10,6 +10,8 @@ import * as baseUrl from '../../../../assets/const/constants';
 })
 export class DelivererService {
   readFactsUrl =  baseUrl.baseUrl + 'factura/lectura/usuario'; //Para guardar todas las facturas
+  saveFactsUrl =  baseUrl.baseUrl + 'factura/lector'; //Para guardar todas las facturas
+  getUsersUrl = baseUrl.baseUrl + 'usuarios';
 
   constructor(private httpClient:HttpClient) { }
 
@@ -19,5 +21,17 @@ export class DelivererService {
     }
     return this.httpClient.post(this.readFactsUrl,json);
   }
+  setUserAndDocuments(numeroDocumento,facturas):Observable<any>{
+    let json = {
+      numeroDocumento:numeroDocumento,
+      facturas:facturas
+    }
+    return this.httpClient.post(this.saveFactsUrl,json);
+  }
+
+  getUsers():Observable<any>{
+    return this.httpClient.get(this.getUsersUrl);
+  }
+
 
 }

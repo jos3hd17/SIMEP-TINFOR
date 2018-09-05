@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '../../user-management/models/user';
 
 
 @Component({
@@ -8,12 +9,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-
-  constructor(private router: Router) { }
+  private user:User = new User;
+  constructor(private router: Router) { 
+    if(sessionStorage.getItem('usuario')){
+      this.user = JSON.parse(sessionStorage.getItem('usuario'));
+    }
+    if(localStorage.getItem('usuario')){
+      this.user = JSON.parse(localStorage.getItem('usuario'));
+    }
+  }
 
   ngOnInit() {
   }
 
+  signIn(){
+    this.router.navigate(['sign-in']);
+  }
   closeSession() {
     sessionStorage.clear();
     localStorage.clear();

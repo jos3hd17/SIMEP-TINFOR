@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class AlertsComponent implements OnInit {
   @Input() title:string;
   @Input() subtitle:string;
+  @Input() color:string;
 
   constructor() { 
    

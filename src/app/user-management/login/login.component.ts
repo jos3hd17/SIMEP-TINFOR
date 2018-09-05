@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
     if ((this.user.usuario !== '' && this.user.usuario !== undefined) && this.user.usuario !== '') {
 
       this.login.loginUser(this.user, password).subscribe(res => {
+        console.log(res);
         this.user = res.usuario;
         console.log("this.user");
         console.log(this.user);

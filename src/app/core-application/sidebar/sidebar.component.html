@@ -13,7 +13,7 @@
             Mapa
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center hover-tag" (click)="goTo(3)">
-            Cargar Facturas
+            Maestro Facturas
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center hover-tag" (click)="goTo(4)">
             Asignar Facturas
@@ -28,12 +28,17 @@
 </div>
 <div class="categories">
     <br>
-       <h6>Configuración</h6> 
-       <hr>
-<ul class="list-group txt-normal">
-    
-    <li class="list-group-item d-flex justify-content-between align-items-center hover-tag" (click)="closeSession()">
-        Cerrar sesión
-    </li>
-</ul>
+    <h6>Configuración</h6>
+    <hr>
+    <ul class="list-group txt-normal">
+        <li class="list-group-item d-flex justify-content-between align-items-center hover-tag" *ngIf="user.cargo == 'COORDINADOR'"
+            (click)="signIn()">
+            Crear usuario
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center hover-tag" (click)="closeSession()">
+            Cerrar sesión
+        </li>
+
+    </ul>
+
 </div>

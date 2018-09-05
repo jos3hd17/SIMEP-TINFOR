@@ -23,11 +23,49 @@ export class UploadItemsComponent implements OnInit {
   private title = "Cargando..";
   private subtitle = "Espere mientras codificamos la información";
   private cargando = false;
+  private error=false;
+  private localeText:any;
+  private option:boolean=false;
 
   private factura: FacturasModel = new FacturasModel;
 
 
   constructor(private uploadService: UploadItemsService) {
+    this.localeText = {
+      page: "Pagina",
+      more: "Más",
+      to: "A",
+      of: "De",
+      next: "Siguiente",
+      last: "Último",
+      first: "Primero",
+      previous: "Anterior",
+      loadingOoo: "Cargando...",
+      selectAll: "Seleccionar todo",
+      searchOoo: "Buscar...",
+      blanks: "En blanco",
+      filterOoo: "Filtrar...",
+      applyFilter: "Aplicar filtro...",
+      equals: "Igual",
+      notEqual: "No es igual",
+      lessThanOrEqual: "Menor o igual",
+      greaterThanOrEqual: "Mayor o igual",
+      inRange: "Rango",
+      lessThan: "Menor que",
+      greaterThan: "Mayor que",
+      contains: "Contiene",
+      startsWith: "Comienza por",
+      endsWith: "Finaliza por",
+      group: "Grupo",
+      columns: "Columnas",
+      groupBy: "Agrupar por",
+      ungroupBy: "Desagrupar",
+      resetColumns: "Reestablecer columnas",
+      notContains:"No contiene",
+      and:"Y",
+      or:"O"
+    };
+  
 
     this.columnDefs = [
       {
@@ -98,13 +136,29 @@ export class UploadItemsComponent implements OnInit {
       }
     ]
   }
+  options(){
+    if(this.option == false){
+      this.option=true;
+    } else {
+      this.option=false;
+    }
+  }
 
   ngOnInit() {
+    this.cargando = true;
     this.uploadService.getFacturas().subscribe(t => {
+      console.log(t);      
+      if(t.message){
+        console.log("Error");
+        this.showTable = true;
+        this.cargando = false;
+      }
       if(t.facturas){
         this.jsonTable = t.facturas;
         this.showTable = true;
+        this.cargando = false;
       }
+
      
     });
   }
@@ -124,7 +178,7 @@ export class UploadItemsComponent implements OnInit {
     if (this.file == undefined) {
       this.title = "Ingrese un dato";
       this.subtitle = "Debe ingresar un dato para continuar";
-      this.cargando = true;
+      this.error = true;
       return;
     }
     this.title = "Cargando..";
@@ -143,23 +197,48 @@ export class UploadItemsComponent implements OnInit {
       let jsonTemp = this.jsonTable;
       let jsonManualesTemp = this.jsonManuales;
       if (this.jsonManuales === []) {
-        this.jsonTable = XLSX.utils.sheet_to_json(worksheet, { raw: true });
+        jsonTemp = XLSX.utils.sheet_to_json(worksheet, { raw: true });
+        console.log(jsonTemp)
+        this.uploadService.deleteFacturas().subscribe(t => {
+          console.log(t);
+        });
+
+        this.uploadService.setFacturas(jsonTemp).subscribe(t => {
+          if (!t.message){
+            this.title = "Error!";
+            this.subtitle = "Verifique que la información ingresada sea valida y se encuentre dentro del rango maximo de datos permitido";
+          }
+        });
+
+        this.jsonTable = jsonTemp;
       } else {
         jsonTemp = XLSX.utils.sheet_to_json(worksheet, { raw: true });
+        console.log(jsonTemp);
         this.jsonManuales.forEach(element => {
           jsonTemp.push(element);
         });
+        this.uploadService.deleteFacturas().subscribe(t => {
+          console.log(t);
+        });
+
+        this.uploadService.setFacturas(jsonTemp).subscribe(t => {
+          if (!t.message){
+            jsonTemp = [];
+            this.title = "Error!";
+            this.subtitle = "Verifique que la información ingresada sea valida y se encuentre dentro del rango maximo de datos permitido";
+          }
+        });
+        
         this.jsonTable = jsonTemp;
       }
+      this.title = "Cargando..";
+      this.subtitle = "Espere mientras subimos la información";
+      
       this.showTable = true;
       if (this.gridApi !== undefined) {
         this.gridApi.setRowData(this.jsonTable);
       }
-      this.title = "Cargando..";
-      this.subtitle = "Espere mientras subimos la información";
-      this.uploadService.setFacturas(this.jsonTable).subscribe(t => {
-        console.log(t.message);
-      });
+      
 
 
       this.cargando = false;

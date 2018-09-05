@@ -1,7 +1,7 @@
 <div class="body-page">
   <div class="container">
     <div class="floating-alert" *ngIf="!registrado" (click)="registrado = true">
-      <app-alerts [title]="titulo" [subtitle]="mensaje"></app-alerts>
+      <app-alerts [title]="titulo" [subtitle]="mensaje" [color]="color"></app-alerts>
     </div>  
 
     <div class="sign-form">
@@ -99,7 +99,16 @@
             </label>
           </div>
         </div>
+        <div class="row">
+          <div class="col">
+            <button type="submit" class="btn btn-danger btn-lg btn-block" (click)="back()">Regresar</button>
+
+          </div>
+          <div class="col">
         <button type="submit" class="btn btn-success btn-lg btn-block" (click)="auth()">Continuar</button>
+            
+          </div>
+        </div>
       </form>
       
     </div>
